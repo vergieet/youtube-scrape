@@ -25,7 +25,7 @@ app.get('/api/search', function(req, res){
             
             var title, length;
             var json = { results: [] };
-
+            
             $(".yt-lockup-dismissable").each(function(index, vid) {
                 // Get video details
                 var title = $(vid).children().last().children().first().children().first().text();
@@ -36,13 +36,20 @@ app.get('/api/search', function(req, res){
                 var upload_date = $(vid).children().last().children().eq(2).children().first().children().first().text();
                 var views = $(vid).children().last().children().eq(2).children().first().children().last().text().split(" ")[0];
                 var thumbnail = $(vid).children().first().children().first().children().first().children().first().children().first().attr("src");
+                var altThumbnail = thumbnail.split('v=')[1];
+                var ampersandPosition = altThumbnail.indexOf('&');
+                if(ampersandPosition != -1) {
+                    altThumbnail = altThumbnail.substring(0, ampersandPosition);
+                }
+                altThumbnail = "http://i3.ytimg.com/vi/" + altThumbnail+ "/hqdefault.jpg";
+                
                 var video = {
                     "title": title,
                     "url": url,
                     "duration": duration,
                     "snippet": snippet,
                     "upload_date": upload_date,
-                    "thumbnail_src": thumbnail,
+                    "thumbnail_src": (!thumbnail.includes("http")?altThumbnail:thumbnail),
                     "views": views
                 }
                 // Get user details
