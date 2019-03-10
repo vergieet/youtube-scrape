@@ -36,9 +36,9 @@ app.get('/api/search', function(req, res){
                 var upload_date = $(vid).children().last().children().eq(2).children().first().children().first().text();
                 var views = $(vid).children().last().children().eq(2).children().first().children().last().text().split(" ")[0];
                 var thumbnail = $(vid).children().first().children().first().children().first().children().first().children().first().attr("src");
-                var altThumbnail = thumbnail.split('v=')[1];
-                altThumbnail = (altThumbnail != undefined) ? altThumbnail : url.split("youtu.be/")[1];
-
+                var altThumbnail = url.split('v=')[1];
+                altThumbnail = (altThumbnail !== undefined) ? altThumbnail : url.split("youtu.be/")[1];
+                console.log(altThumbnail)
                 altThumbnail = "http://i3.ytimg.com/vi/" + altThumbnail.split("&")[0] + "/hqdefault.jpg";
                 
                 var video = {
