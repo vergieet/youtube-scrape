@@ -28,6 +28,7 @@ app.get('/api/search', function(req, res){
             
             $(".yt-lockup-dismissable").each(function(index, vid) {
                 // Get video details
+                var skipped = undefined == $(vid).children().last().children().first().children().first().attr("href");
                 var title = $(vid).children().last().children().first().children().first().text();
                 var url = "https://www.youtube.com" + $(vid).children().last().children().first().children().first().attr("href");
                 var duration = /\d+:\d+/.exec($(vid).children().last().children().first().children().last().text());
@@ -59,7 +60,7 @@ app.get('/api/search', function(req, res){
                     "verified": verified
                 }
                 // Send results
-                json.results.push({ video: video, uploader: uploader });
+                if(!skipped) json.results.push({ video: video, uploader: uploader });
             });
             res.json(json);
         }
