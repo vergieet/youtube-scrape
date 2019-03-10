@@ -38,7 +38,6 @@ app.get('/api/search', function(req, res){
                 var thumbnail = $(vid).children().first().children().first().children().first().children().first().children().first().attr("src");
                 var altThumbnail = url.split('v=')[1];
                 altThumbnail = (altThumbnail !== undefined) ? altThumbnail : url.split("youtu.be/")[1];
-                console.log(altThumbnail)
                 altThumbnail = "http://i3.ytimg.com/vi/" + altThumbnail.split("&")[0] + "/hqdefault.jpg";
                 
                 var video = {
