@@ -37,11 +37,9 @@ app.get('/api/search', function(req, res){
                 var views = $(vid).children().last().children().eq(2).children().first().children().last().text().split(" ")[0];
                 var thumbnail = $(vid).children().first().children().first().children().first().children().first().children().first().attr("src");
                 var altThumbnail = thumbnail.split('v=')[1];
-                var ampersandPosition = altThumbnail.indexOf('&');
-                if(ampersandPosition != -1) {
-                    altThumbnail = altThumbnail.substring(0, ampersandPosition);
-                }
-                altThumbnail = "http://i3.ytimg.com/vi/" + altThumbnail+ "/hqdefault.jpg";
+                altThumbnail = (altThumbnail != undefined) ? altThumbnail : url.split("youtu.be/")[1];
+
+                altThumbnail = "http://i3.ytimg.com/vi/" + altThumbnail.split("&")[0] + "/hqdefault.jpg";
                 
                 var video = {
                     "title": title,
