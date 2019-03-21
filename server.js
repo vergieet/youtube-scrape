@@ -67,6 +67,30 @@ app.get('/api/search', function(req, res){
     });
 });
 
+//API route
+app.get('/api/detail', function(req, res){
+    // Specify YouTube search url
+    var url = "https://www.youtube.com/watch?v=" + req.query.id;
+    // Access YouTube search
+    request(url, function(error, response, html) {
+        // Check for errors
+        if(!error) {
+            var $ = cheerio.load(html);
+            
+            var title, length;
+            var json = { results: [] };
+            
+            $(".ytd-video-secondary-info-renderer").each(function(index, vid) {
+                // Get video details
+                console.log(index,vid)
+                // Send results
+//                 if(!skipped) json.results.push({ video: video, uploader: uploader });
+            });
+            res.json(json);
+        }
+    });
+});
+
 app.listen(process.env.PORT || 8080, function () {
   console.log('Listening on port 8080');
 });
