@@ -76,7 +76,7 @@ app.get('/api/detail', function(req, res){
         // Check for errors
         if(!error) {
             var $ = cheerio.load(html);
-            var json = { results: $("#eow-description").html() };
+            var json = { description: $("#eow-description").html() };
             res.json(json);
         }
     });
