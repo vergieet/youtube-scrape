@@ -76,16 +76,7 @@ app.get('/api/detail', function(req, res){
         // Check for errors
         if(!error) {
             var $ = cheerio.load(html);
-            
-            var title, length;
             var json = { results: $("#eow-description").html() };
-
-//             $(".content").each(function(index, vid) {
-//                 // Get video details
-//                 console.log(index,vid)
-//                 // Send results
-// //                 if(!skipped) json.results.push({ video: video, uploader: uploader });
-//             });
             res.json(json);
         }
     });
